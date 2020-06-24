@@ -1,6 +1,6 @@
-Muro Marketti
+Mysli
 ===
 
 > Work in progress
 
-Categorize second-hand computer parts from murobbs forum posts.
+Categorize second-hand computer parts from MuroBBS forum posts.
