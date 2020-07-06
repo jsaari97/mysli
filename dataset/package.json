@@ -1,11 +1,12 @@
 {
-  "name": "data-scraper",
+  "name": "mysli-dataset",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "fast-xml-parser": "^3.17.4",
     "puppeteer": "^5.0.0",
+    "x-ray": "^2.3.4",
     "xmldom": "^0.3.0",
     "xpath": "^0.0.27"
   }
