@@ -9,4 +9,4 @@ Categorize second-hand computer parts from MuroBBS forum posts.
 
 ### Dataset
 
-Scrapes training data and cleans up the data.
+Scrapes and cleans training data.
