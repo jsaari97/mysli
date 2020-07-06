@@ -8,6 +8,8 @@ const puppeteer = require("puppeteer");
  * @returns {Promise<string>}
  */
 const fetchHtml = async (url) => {
+  const bareUrl = url.split("#")[0];
+
   let browser = null;
 
   try {
@@ -35,54 +37,56 @@ const fetchHtml = async (url) => {
     let maxPage = 0;
 
     const handlePage = async (cursor) => {
-      const response = await page.waitForResponse(`${url}fetch/`);
+      try {
+        const response = await page.waitForResponse(`${bareUrl}fetch/`);
 
-      await page.waitFor(800);
+        await page.waitFor(800);
 
-      const json = await response.json();
+        const json = await response.json();
 
-      data.push(json.result.html);
+        data.push(json.result.html);
 
-      // get total number of pages
-      if (!maxPage) {
-        maxPage = await page.evaluate(() => {
-          const node = document.querySelector(
-            ".pagination > li:last-child > a"
-          );
+        // get total number of pages
+        if (!maxPage) {
+          maxPage = await page.evaluate(() => {
+            const node = document.querySelector(
+              ".pagination > li:last-child > a"
+            );
 
-          return parseInt(node.innerHTML);
-        });
+            return parseInt(node.innerHTML);
+          });
 
-        maxPage = 2;
-      }
+          maxPage = 2;
+        }
 
-      if (cursor >= maxPage) {
-        return;
-      }
+        if (cursor >= maxPage) {
+          return;
+        }
 
-      const [pagination] = await page.$x(
-        `//ul[contains(@class, 'pagination')]/li/a[contains(., '${
-          cursor + 1
-        }')]`
-      );
+        const [pagination] = await page.$x(
+          `//ul[contains(@class, 'pagination')]/li/a[contains(., '${
+            cursor + 1
+          }')]`
+        );
 
-      if (pagination) {
-        await pagination.click();
-        await handlePage(cursor + 1);
+        if (pagination) {
+          await pagination.click();
+          await handlePage(cursor + 1);
+        }
+      } catch (error) {
+        return Promise.reject(error);
       }
     };
 
     await handlePage(1);
 
-    await browser.close();
-
-    return Promise.resolve(data.join(""));
+    return data.join("");
   } catch (error) {
-    if (browser) {
-      await browser.close();
-    }
-
     return Promise.reject(error);
+  } finally {
+    if (browser) {
+      browser.close();
+    }
   }
 };
 

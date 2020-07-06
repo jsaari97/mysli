@@ -24,8 +24,6 @@ module.exports = async ({ name, shape, parse }) => {
       JSON.stringify(data, "", 2),
       "utf8"
     );
-
-    return data;
   } catch (error) {
     return Promise.reject(error);
   }

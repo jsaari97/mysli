@@ -3,13 +3,17 @@ const path = require("path");
 const { fetchHtml } = require("./fetch");
 const { stripHtml } = require("./cleanup");
 
-const main = async (url) => {
+module.exports = async ({ name, product, query }) => {
   try {
+    const identifier = product || name;
+
+    const url = `https://pcpartpicker.com/products/${identifier}/${
+      query ? `#${query}` : ""
+    }`;
+
     const data = await fetchHtml(url);
 
     const minified = await stripHtml(data);
-
-    const [name] = url.split("/").filter(Boolean).reverse();
 
     await fs.mkdir(path.join(process.cwd(), "/html"), { recursive: true });
 
@@ -22,5 +26,3 @@ const main = async (url) => {
     return Promise.reject(error);
   }
 };
-
-main("https://pcpartpicker.com/products/memory/");
