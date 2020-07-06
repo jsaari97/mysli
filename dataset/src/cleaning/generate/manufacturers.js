@@ -4,7 +4,7 @@ const xray = require("x-ray");
 
 const x = xray();
 
-const outputDir = path.join(__dirname, "/data");
+const outputDir = path.join(__dirname, "../data");
 
 module.exports = async () => {
   try {

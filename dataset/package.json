@@ -7,7 +7,7 @@
     "build": "run-s fetch scrape",
     "fetch": "node src/scripts/fetch.js",
     "scrape": "node src/scripts/scrape.js",
-    "gen:cleaning": "node src/cleaning/manufacturers.js"
+    "cleaning:gen": "node src/cleaning/generate/index.js"
   },
   "dependencies": {
     "fast-xml-parser": "^3.17.4",
