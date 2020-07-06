@@ -7,7 +7,8 @@
     "build": "run-s fetch scrape",
     "fetch": "node src/scripts/fetch.js",
     "scrape": "node src/scripts/scrape.js",
-    "cleaning:gen": "node src/cleaning/generate/index.js"
+    "cleaning:gen": "node src/cleaning/generate/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "fast-xml-parser": "^3.17.4",
@@ -18,5 +19,8 @@
     "xmldom": "^0.3.0",
     "xpath": "^0.0.27",
     "yargs": "^15.4.0"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }
