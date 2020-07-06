@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-// const MAX = 10;
+const MAX = 10;
 
 /**
  * Fetch HTML data for given category
@@ -46,7 +46,7 @@ const fetchHtml = async (url) => {
 
         data.push(json.result.html);
 
-        // get total number of pages
+        // get number of pages to fetch
         if (!maxPage) {
           maxPage = await page.evaluate(() => {
             const node = document.querySelector(
@@ -56,7 +56,7 @@ const fetchHtml = async (url) => {
             return parseInt(node.innerHTML);
           });
 
-          maxPage = 2;
+          maxPage = Math.min(maxPage, MAX);
         }
 
         if (cursor >= maxPage) {
