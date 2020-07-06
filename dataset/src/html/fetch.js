@@ -40,7 +40,7 @@ const fetchHtml = async (url) => {
       try {
         const response = await page.waitForResponse(`${bareUrl}fetch/`);
 
-        await page.waitFor(800);
+        await page.waitFor(800 + Math.random() * 800);
 
         const json = await response.json();
 
