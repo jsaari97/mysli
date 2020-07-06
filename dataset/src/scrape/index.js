@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const xray = require("x-ray");
+const { preProcess, postProcess } = require("../cleaning");
 
 const x = xray();
 
@@ -13,9 +14,20 @@ module.exports = async ({ name, shape, parse }) => {
 
     let data = await x(html, "tr", shape);
 
+    if (typeof data[0] === "object") {
+      data = data.map((item) => Object.values(item).join(" "));
+    }
+
+    data = data.map(preProcess);
+
     if (parse) {
       data = parse(data);
     }
+
+    data = data.map(postProcess).filter(Boolean);
+
+    // Remove duplicates
+    data = [...new Set(data)];
 
     await fs.mkdir(outputDir, { recursive: true });
 

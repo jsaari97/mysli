@@ -4,6 +4,16 @@ const xray = require("x-ray");
 
 const x = xray();
 
+const manual = [
+  "be quiet!",
+  "VisionTek",
+  "KFA2",
+  "NVIDIA",
+  "Enermax",
+  "Xigmatek",
+  "Silverstone",
+];
+
 const outputDir = path.join(__dirname, "../data");
 
 module.exports = async () => {
@@ -21,9 +31,12 @@ module.exports = async () => {
             /(\(.*?\)|Technology|International|Memory|Technologies|Electronics|Corporation|Interactive|,|Inc\.|Components|^G-)/gi,
             ""
           )
+          .replace(/\s\s+/, " ")
           .trim()
       )
       .filter(Boolean);
+
+    data = data.concat(manual);
 
     // Remove duplicates
     data = [...new Set(data)];

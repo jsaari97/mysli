@@ -32,7 +32,12 @@ module.exports = [
   },
   {
     name: "video-card",
-    shape: ["td:nth-child(2) a p"],
+    shape: [
+      {
+        model: "td:nth-child(2) a p",
+        chip: "td:nth-child(3)",
+      },
+    ],
   },
   {
     name: "cpu-cooler",
