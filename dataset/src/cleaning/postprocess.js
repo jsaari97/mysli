@@ -7,7 +7,7 @@ module.exports = (item) => {
     .replace(/(\s|^)(\w{1,2})(\s|$)/gi, "$1$3")
     .replace(/(\s|^)(\d+)(\s|$)/gi, "$1$3")
     .replace(/(\s|^)(\w{1,2})(\s|$)/gi, "$1$3")
-    .replace(/-(\s+)?$/g, "")
+    .replace(/(-|,|\.)(\s+)?$/g, "")
     .replace(/\s\s+/g, " ")
     .trim();
 };
