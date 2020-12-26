@@ -16,9 +16,9 @@
     "puppeteer": "^5.0.0",
     "ramda": "^0.27.0",
     "x-ray": "^2.3.4",
-    "xmldom": "^0.3.0",
-    "xpath": "^0.0.29",
-    "yargs": "^15.4.0"
+    "xmldom": "^0.4.0",
+    "xpath": "0.0.32",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "jest": "^26.1.0"
